@@ -64,6 +64,19 @@
             padding: 80px 5% 20px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://static.compgoo.com/ueditor/autoLoad/70c37540490f3f47a492d0beb6f180eb150311921341007870344EN1fcd13363cc187edee97d3682d4ee8459.gif') no-repeat center center;
+            background-size: cover;
+        }
+
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.4;
         }
         
         h1 {
@@ -79,6 +92,27 @@
             margin-bottom: 30px;
             color: var(--secondary);
             font-weight: 500;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px 0;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-grid img:hover {
+            transform: translateY(-5px);
         }
         
         .model-container {
@@ -285,7 +319,7 @@
         
         .social-proof {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             left: 20px;
             background-color: var(--white);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -391,6 +425,88 @@
         .badge span {
             color: var(--secondary);
         }
+
+        .product-gallery {
+            padding: 60px 5%;
+            background-color: var(--white);
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .gallery-title::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .banner-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .animated-banner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .animated-banner img, .animated-banner video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         
         footer {
             padding: 40px 5%;
@@ -450,13 +566,18 @@
             
             .benefits-container,
             .testimonials-container,
-            .features-container {
+            .features-container,
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
             
             .quality-badges {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -547,6 +668,8 @@
 
     <main>
         <section class="hero">
+            <img class="animated-background" src="https://static.compgoo.com/ueditor/autoLoad/70c37540490f3f47a492d0beb6f180eb150311921341007870344EN1fcd13363cc187edee97d3682d4ee8459.gif" alt="Animated Background">
+            
             <h1>Tas Gaya Elegan Premium</h1>
             <p class="tagline">Tampil Berkelas dengan Sentuhan Modern, Kualitas Terbaik untuk Gaya Hidupmu</p>
             
@@ -556,47 +679,19 @@
                 <div class="badge">✓ <span>Pengiriman Cepat</span></div>
             </div>
             
-            <div class="model-container">
-                <model-viewer 
-                    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
-                    alt="3D model of Elegant Style Bag"
-                    camera-controls
-                    auto-rotate
-                    rotation-per-second="20deg"
-                    interaction-prompt="none"
-                    ar
-                    shadow-intensity="1"
-                    environment-image="neutral"
-                    exposure="1.5"
-                    class="rotate-animation">
-                    
-                    <button slot="ar-button" class="ar-button">
-                        Lihat AR
-                    </button>
-                    
-                    <!-- Hotspots for bag features -->
-                    <button class="hotspot" slot="hotspot-1" data-position="0 1.5 1" data-normal="0 0 1">
-                        <div class="hotspot-label">Material Premium</div>
-                    </button>
-                    
-                    <button class="hotspot" slot="hotspot-2" data-position="1 0.5 0.5" data-normal="1 0 0">
-                        <div class="hotspot-label">Kompartemen Ekstra</div>
-                    </button>
-                    
-                    <button class="hotspot" slot="hotspot-3" data-position="-1 0 0" data-normal="-1 0 0">
-                        <div class="hotspot-label">Jahitan Presisi</div>
-                    </button>
-                </model-viewer>
-            </div>
-            
-            <div class="controls">
-                <button class="control-btn" id="rotate">Putar 360°</button>
-                <button class="control-btn" id="zoom">Zoom Detail</button>
-                <button class="control-btn" id="reset">Reset View</button>
+            <div class="image-grid">
+                <img src="https://i.ebayimg.com/images/g/p8kAAOSwS4Rnatat/s-l1600.webp" alt="Tas Elegan View 1">
+                <img src="https://i.ebayimg.com/images/g/3o4AAOSwscxnataz/s-l1600.webp" alt="Tas Elegan View 2">
+                <img src="https://i.ebayimg.com/images/g/UqgAAOSwMCtnata0/s-l1600.webp" alt="Tas Elegan View 3">
+                <img src="https://i.ebayimg.com/images/g/vgwAAOSwn8tnatab/s-l1600.webp" alt="Tas Elegan View 4">
             </div>
             
             <button class="cta" id="order-now">Pesan Sekarang</button>
         </section>
+
+        <div class="animated-banner">
+            <img src="https://static.compgoo.com/ueditor/autoLoad/e61cf686755502b29c6191ef1ca7e0b8150311921341007870344EN154e76ac4c118957b25c9e2f6b7c4f1c5.gif" alt="Promo Banner Animated">
+        </div>
 
         <section class="benefits">
             <h2 class="section-title">Keunggulan Tas Elegan</h2>
@@ -618,6 +713,38 @@
                 </div>
             </div>
         </section>
+
+        <div class="banner-container">
+            <img src="https://static.compgoo.com/ueditor/autoLoad/70b0880c96d5ed097d20e852cab34901150311921341007870344EN12521d9a0799f4bd58fe897684bc1d6a0.gif" alt="Premium Banner">
+        </div>
+
+        <section class="product-gallery">
+            <h2 class="gallery-title">Galeri Produk</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://cdn.orderonline.id/uploads/images_4185991725536818448.png" alt="Tas Elegan Detail 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.orderonline.id/uploads/images_9433341725536371279.png" alt="Tas Elegan Detail 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://pic.compgoo.com/ueditor/autoLoad/5317ff381e5f1e6a47df87cf2ad7e640150311921341007870344EN205572c1a4ec4289bf3b489702269cd66.jpg?_t=1725510648&_s=9d5dc018315df9f929f0ec1cae113cd7&_token=b26be18a57368299adf4c881f14d9a1b&_e=10&_c=1321d965df63e961633ee53ebe25430d" alt="Tas Elegan Detail 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.compgoo.com/ueditor/autoLoad/ec13573871fb34b3be32ba74906e3c85150311921341007870344EN1b5dd5944d84a012b159e3ade33c41540.640x1000.jpg" alt="Tas Elegan Model View">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.compgoo.com/ueditor/autoLoad/005243350987d3632c71f3edd593f0dc150311921341007870344EN1b50a5afb608c349f2ae37688c06d9dbe.640x1000.jpg" alt="Tas Elegan Model View 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://pic.compgoo.com/ueditor/autoLoad/7256c7faf5e8ada892fad8f3986251f8150311921341007870344EN979c0a7d68afd4ca5e0727212ef4a4957.jpg?_t=1725510648&_s=45dce6da7e1d1716880af6f55222e86b&_token=b26be18a57368299adf4c881f14d9a1b&_e=10&_c=20f66eb31bd5698d8f6a892789ae726f" alt="Tas Elegan Detail 4">
+                </div>
+            </div>
+        </section>
+
+        <div class="animated-banner">
+            <img src="https://cdn.orderonline.id/uploads/images_6504741725535559320.gif" alt="Animated Promo">
+        </div>
 
         <section class="features">
             <h2 class="section-title">Fitur Unggulan</h2>
@@ -736,29 +863,6 @@
             }, 1500);
         });
         
-        // 3D model controls
-        const modelViewer = document.querySelector('model-viewer');
-        
-        document.getElementById('rotate').addEventListener('click', () => {
-            modelViewer.classList.toggle('rotate-animation');
-        });
-        
-        document.getElementById('zoom').addEventListener('click', () => {
-            const orbitCameraTarget = modelViewer.getCameraTarget();
-            const orbitCameraOrbit = modelViewer.getCameraOrbit();
-            
-            modelViewer.cameraOrbit = `${orbitCameraOrbit.theta}deg ${orbitCameraOrbit.phi}deg 2m`;
-            setTimeout(() => {
-                modelViewer.cameraOrbit = `${orbitCameraOrbit.theta}deg ${orbitCameraOrbit.phi}deg 4m`;
-            }, 1000);
-        });
-        
-        document.getElementById('reset').addEventListener('click', () => {
-            modelViewer.resetTurntable();
-            modelViewer.cameraOrbit = "0deg 75deg 2m";
-            modelViewer.fieldOfView = "30deg";
-        });
-        
         // Order buttons
         document.getElementById('order-now').addEventListener('click', () => {
             window.location.href = 'https://mila.orderonline.id/elegant-style-bag';
@@ -813,20 +917,6 @@
             showSocialProof();
             setInterval(showSocialProof, 12000);
         }, 5000);
-        
-        // Dynamic 3D model loader
-        // Note: In a real implementation, you would replace the example model URL with your actual bag 3D model
-        document.addEventListener('DOMContentLoaded', () => {
-            // Replace with your actual 3D model URL in production
-            modelViewer.src = 'https://modelviewer.dev/shared-assets/models/purse.glb';
-            
-            // Position hotspots correctly for the bag model
-            const hotspots = document.querySelectorAll('.hotspot');
-            hotspots.forEach(hotspot => {
-                const position = hotspot.getAttribute('data-position').split(' ');
-                hotspot.style.transform = `translate(${position[0]}px, ${position[1]}px)`;
-            });
-        });
     </script>
 </body>
 </html>
